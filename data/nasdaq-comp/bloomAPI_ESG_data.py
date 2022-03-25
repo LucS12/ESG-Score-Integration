@@ -8,7 +8,7 @@ con.start()
 
 #Read in stock names:
 names = pd.read_csv('symbols.csv')
-names = names.value.values
+names = names.Symbol.values
 
 #Read in Environment Fields:
 env = pd.read_csv('env.csv')
