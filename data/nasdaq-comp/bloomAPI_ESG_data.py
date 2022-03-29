@@ -11,7 +11,7 @@ names = pd.read_csv('symbols.csv')
 names = names.Symbol.values
 
 #Read in Environment Fields:
-env = pd.read_csv('env.csv')
+env = pd.read_csv('environmental_fields.csv')
 env = env.field.values
 
 #Gather data with fields:
