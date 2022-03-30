@@ -6,13 +6,28 @@ import pdblp as bl
 con = bl.BCon(debug = False, port=8194, timeout = 5000)
 con.start()
 
-#Read in stock names:
+#Read in stock names from Nasdaq Composite Index:
 names = pd.read_csv('symbols.csv')
-names = names.Symbol.values
+names = names.value.values
 
-#Read in Environment Fields:
-env = pd.read_csv('environmental_fields.csv')
-env = env.field.values
+#Read in Environmental Fields:
+e = pd.read_csv('env.csv')
+e = e.env.values
+
+#Read in Social Fields:
+s = pd.read_csv('soc.csv')
+s = s.soc.values
+
+#Read in Governance Fields:
+g = pd.read_csv('gov.csv')
+g = g.gov.values
 
 #Gather data with fields:
-env_data = con.ref(list(names[:500]), list(env[:]))
+env_data = con.ref(names, e)
+soc_data = con.ref(names, s)
+gov_data = con.ref(names, g)
+
+#Place gathered data into new csv files:
+env_data.to_csv('env_data.csv')
+soc_data.to_csv('soc_data.csv')
+gov_data.to_csv('gov_data.csv')
