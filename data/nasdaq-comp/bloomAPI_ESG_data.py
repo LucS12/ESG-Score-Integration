@@ -11,15 +11,15 @@ names = pd.read_csv('symbols.csv')
 names = names.value.values
 
 #Read in Environmental Fields:
-e = pd.read_csv('env.csv')
+e = pd.read_csv('environmental_fields.csv')
 e = e.env.values
 
 #Read in Social Fields:
-s = pd.read_csv('soc.csv')
+s = pd.read_csv('social_fields.csv')
 s = s.soc.values
 
 #Read in Governance Fields:
-g = pd.read_csv('gov.csv')
+g = pd.read_csv('governance_fields.csv')
 g = g.gov.values
 
 #Gather data with fields:
