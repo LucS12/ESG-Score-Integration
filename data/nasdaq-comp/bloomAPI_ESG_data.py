@@ -28,6 +28,6 @@ soc_data = con.ref(names, s)
 gov_data = con.ref(names, g)
 
 #Place gathered data into new csv files:
-env_data.to_csv('env_data.csv')
-soc_data.to_csv('soc_data.csv')
-gov_data.to_csv('gov_data.csv')
+env_data.to_csv('env_all.csv')
+soc_data.to_csv('soc_all.csv')
+gov_data.to_csv('gov_all.csv')
