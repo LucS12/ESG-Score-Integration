@@ -7,4 +7,4 @@
 
 - Jupyter Notebook report around the code for data gathering, narrowing down fields, and calculations.
 - Python file of the raw code for the score calculations.
-- CSV files with the ESG data used.
+- CSV files with the ESG data used and the resulting file with the generated scores.
