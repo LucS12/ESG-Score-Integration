@@ -1,40 +1,43 @@
-#Necessary packages:
+# Add Necessary packages:
 import tkinter as tk               
 from tkinter import ttk             
 import pandas as pd
 import numpy as np
 
-#Root window of GUI
+# Root window of GUI and specify window size
 root = tk.Tk()
 root.geometry('700x900')
 root.resizable(False, False)
 root.title('ESG Investing')
+
+# Define column grids
 root.columnconfigure(0, weight=1)
 root.columnconfigure(1, weight=4)
 root.columnconfigure(2, weight=1)
 root.columnconfigure(3, weight=1)
 
 #%% SLIDER 1 - Enviromental ESG Score Input:
-#slider current value:
+# slider1 current value:
 current_value1 = tk.DoubleVar()
 
-
+# slider1 create actions when clicking button
 def get_current_value1():
     return '{: .2f}'.format(current_value1.get())
-
-
 def slider1_changed(event):
     value1_label.configure(text=get_current_value1())
-    
+
+# Add Title of Application Window
 ttk.Label(root, text="\n ESG Asset Allocation Application", font="italic").grid(row=0,columnspan=2)
 ttk.Label(root, text="Luc C. Smith & Samuel M. Reisgys").grid(row=1, columnspan= 2)
 ttk.Label(root, text="_____________________________________________________________________________________________________________________________________________\n").grid(row=2,columnspan=2, ipady=5, ipadx=5)
+
 # label for the slider1
 slider1_label = ttk.Label(
     root,
     text=' (1) - How much do you care about Environmental (E) issues? \n         Ex: gas emissions, anti-pollution actions, regulatory tests, etc. \n         (100 being the most care)'
 )
 
+# position slider label in window
 slider1_label.grid(
     column=0,
     row=3,
@@ -51,6 +54,7 @@ slider1 = ttk.Scale(
     variable=current_value1
 )
 
+# position slider in window
 slider1.grid(
     column=1,
     row=3,
@@ -64,6 +68,7 @@ current_value1_label = ttk.Label(
     text='Chosen Score:'
 )
 
+# position the current value number in window
 current_value1_label.grid(
     row=4,
     columnspan=2,
@@ -83,6 +88,7 @@ value1_label.grid(
     sticky='n'
 )
 
+# add separator line after slider 1
 ttk.Label(root, text="_____________________________________________________________________________________________________________________________________________\n").grid(row=7,columnspan=2)
 
 #%% SLIDER 2 - Social
@@ -90,14 +96,11 @@ ttk.Label(root, text="__________________________________________________________
 # slider2 current value2
 current_value2 = tk.DoubleVar()
 
-
 def get_current_value2():
     return '{: .2f}'.format(current_value2.get())
 
-
 def slider2_changed(event):
     value2_label.configure(text=get_current_value2())
-
 
 # label for the slider2
 slider2_label = ttk.Label(
@@ -159,14 +162,11 @@ ttk.Label(root, text="__________________________________________________________
 # slider3 current value3
 current_value3 = tk.DoubleVar()
 
-
 def get_current_value3():
     return '{: .2f}'.format(current_value3.get())
 
-
 def slider3_changed(event):
     value3_label.configure(text=get_current_value3())
-
 
 # label for the slider3
 slider3_label = ttk.Label(
@@ -227,14 +227,11 @@ ttk.Label(root, text="__________________________________________________________
 #%% Risk Aversion
 current_value4 = tk.DoubleVar()
 
-
 def get_current_value4():
     return '{: .2f}'.format(current_value4.get())
 
-
 def slider4_changed(event):
     value4_label.configure(text=get_current_value4())
-
 
 # label for the slider4
 slider4_label = ttk.Label(
@@ -293,12 +290,14 @@ value4_label.grid(
 ttk.Label(root, text="_____________________________________________________________________________________________________________________________________________\n").grid(row=39,columnspan=2)
 
 #%% Stock Picking
+# Define Button command for retrieving value1
 e = tk.StringVar(root)
 def get_current_value5():
     global e
     value1 = e.get()
     return value1
 
+# Define button command for pressing "show sector names" button
 def call_sectors():
     window = tk.Tk()
     window.geometry('250x150')
@@ -306,31 +305,28 @@ def call_sectors():
     ttk.Label(window, text='   Communication Services \n   Consumer \n   Financials \n   Health Care \n   Information Technology \n   Utilities',
               ).grid(row=1, column=1)
     window.mainloop()
-    
-    
+
+# Create "show sector names" button including button action
 tk.Button(root, text="See sector names",command=call_sectors).grid(row=44,columnspan=2,ipadx=18, pady=4)
-
-
 ttk.Label(root,text="Type in any sector you'd like to neglect (Separate it by commas and exact name as shown):").grid(row=40, columnspan=2)
-e_entry = tk.Entry(root, width=50, textvariable = e).grid(row=41,columnspan=2, pady=2)
 
+# Create Entry box for getting user input
+e_entry = tk.Entry(root, width=50, textvariable = e).grid(row=41,columnspan=2, pady=2)
 
 e2 = tk.StringVar(root)
 
+# Create command for retrieving value 6 from GUI
 def get_current_value6():
     global e2
     value2 = e2.get()
     return value2
 
+# Create label and entry bocks for stocks that should be excluded
 ttk.Label(root, text="Stocks that should be excluded from the portfolio (Enter ticker and separate by comma, ex: TSLA, AAPL):").grid(row=45, columnspan=2)
 e2_entry = tk.Entry(root, width=50, textvariable = e2).grid(row=46, columnspan=2, pady=2)
 
-
-
-
-
 #%% Buttons
-
+# Create Button Command for "Confirm Values" Button
 def Confirm():
     
     #Globalize variables needed:
@@ -367,20 +363,37 @@ def Confirm():
     
     return esg_list, stock_list, sec_list
 
-    
-
+#Create and position "Confirm Values" Button
 Confirm = tk.Button(root, text="Confirm Values (1)", command= Confirm)
 Confirm.grid(
     row = 51, columnspan=2, sticky ="w", pady=4, ipadx=26, padx=127
 )
 
+# Create button to quit the app
 tk.Button(root, text="Quit", command=root.destroy, bg="#ed2f2f", fg="white").grid(row=53, column = 0, pady=4)
 
+# Create command for "Loading..." window to destroy when calculation is done
+def shut_down():
+    global window
+    window = tk.Toplevel(root)
+    window.title("Loading...")
+    ttk.Label(window, text="Calculating the portfolio may take up to a minute").grid(row=1, column=1)
+    window.geometry("300x100")
+    window.grab_set()
+    window.lift()
+        
+
+# Create button command for "create portfolio" button
 def get_portfolio():
     
+    global shut_number
     global esg_list 
     global stock_list
     global sec_list
+    
+    #Run loading window
+    shut_down()
+    
     
     #### FAMA-FRENCH 3 Factor Model: Return Prediction ####
     def getFamaFrench3_returns(stocks):
@@ -622,8 +635,14 @@ def get_portfolio():
                  )
     
     plt.show()
+    
+    # Destroy loading window
+    window.destroy()
+    
 
+# Create and position "Create portfolio" button
 tk.Button(root, text="Create Portfolio (2)",command=get_portfolio,bg='#40e342', fg='black', font='bold').grid(row=52,columnspan=2, sticky ="w", pady=4, ipadx=7, padx=127)
 
+# Run the application
 root.mainloop()
 
