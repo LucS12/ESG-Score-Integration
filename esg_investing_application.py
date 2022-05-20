@@ -621,17 +621,6 @@ def get_portfolio():
     plt.annotate(esg_string, xy=(-1.2,0.85), xytext=(-2,0.51), bbox=dict(boxstyle="round", fc="0.8"),
                  )
     
-    #Showing risk and return metrics of portfolio:
-   # plt.annotate(('Annual Return: '+str(r)+'%'),xy=(-1.2,0.85), xytext=(-2,1.01))
-    #plt.annotate(('1Y-Beta: '+str(beta)),xy=(-1.2,0.85), xytext=(-2,0.93))
-    
-    #Showing ESG scores of portfolio:
-   # plt.annotate('ESG Ratings:', xy=(-1.2, -0.4), xytext=(-2, 0.83))
-   # plt.annotate(('Environmental: '+str(np.round(s[0], 2))), xy=(-1.2, -0.4), xytext=(-2, 0.76))
-   # plt.annotate(('Social: '+str(np.round(s[1]))), xy=(-1.2, -0.4), xytext=(-2, 0.68))
-   # plt.annotate(('Governance: '+str(np.round(s[-1]))), xy=(-1.2, -0.4), xytext=(-2, 0.60))
-   # plt.annotate(('Total: ' +str(np.round((s[0]+s[1]+s[-1])/3,2))), xy=(-1.2, -0.4), xytext=(-2, 0.52))
-    
     plt.show()
 
 tk.Button(root, text="Create Portfolio (2)",command=get_portfolio,bg='#40e342', fg='black', font='bold').grid(row=52,columnspan=2, sticky ="w", pady=4, ipadx=7, padx=127)
