@@ -376,9 +376,10 @@ tk.Button(root, text="Quit", command=root.destroy, bg="#ed2f2f", fg="white").gri
 def shut_down():
     global window
     window = tk.Toplevel(root)
-    window.title("Loading...")
-    ttk.Label(window, text="Calculating the portfolio may take up to a minute").grid(row=1, column=1)
-    window.geometry("300x100")
+    window.title("Loading... \nIt may take up to a minute")
+    Label1 = tk.Label(window, text="Calculating the portfolio may take up to a minute")
+    Label1.pack()
+    window.geometry("450x15")
     window.grab_set()
     window.lift()
         
@@ -386,14 +387,12 @@ def shut_down():
 # Create button command for "create portfolio" button
 def get_portfolio():
     
-    global shut_number
     global esg_list 
     global stock_list
     global sec_list
     
     #Run loading window
     shut_down()
-    
     
     #### FAMA-FRENCH 3 Factor Model: Return Prediction ####
     def getFamaFrench3_returns(stocks):
