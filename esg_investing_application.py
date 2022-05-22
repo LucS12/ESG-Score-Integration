@@ -1,43 +1,40 @@
-# Add Necessary packages:
+#Necessary packages:
 import tkinter as tk               
 from tkinter import ttk             
 import pandas as pd
 import numpy as np
 
-# Root window of GUI and specify window size
+#Root window of GUI
 root = tk.Tk()
 root.geometry('700x900')
 root.resizable(False, False)
 root.title('ESG Investing')
-
-# Define column grids
 root.columnconfigure(0, weight=1)
 root.columnconfigure(1, weight=4)
 root.columnconfigure(2, weight=1)
 root.columnconfigure(3, weight=1)
 
 #%% SLIDER 1 - Enviromental ESG Score Input:
-# slider1 current value:
+#slider current value:
 current_value1 = tk.DoubleVar()
 
-# slider1 create actions when clicking button
+
 def get_current_value1():
     return '{: .2f}'.format(current_value1.get())
+
+
 def slider1_changed(event):
     value1_label.configure(text=get_current_value1())
-
-# Add Title of Application Window
+    
 ttk.Label(root, text="\n ESG Asset Allocation Application", font="italic").grid(row=0,columnspan=2)
 ttk.Label(root, text="Luc C. Smith & Samuel M. Reisgys").grid(row=1, columnspan= 2)
 ttk.Label(root, text="_____________________________________________________________________________________________________________________________________________\n").grid(row=2,columnspan=2, ipady=5, ipadx=5)
-
 # label for the slider1
 slider1_label = ttk.Label(
     root,
     text=' (1) - How much do you care about Environmental (E) issues? \n         Ex: gas emissions, anti-pollution actions, regulatory tests, etc. \n         (100 being the most care)'
 )
 
-# position slider label in window
 slider1_label.grid(
     column=0,
     row=3,
@@ -54,7 +51,6 @@ slider1 = ttk.Scale(
     variable=current_value1
 )
 
-# position slider in window
 slider1.grid(
     column=1,
     row=3,
@@ -68,7 +64,6 @@ current_value1_label = ttk.Label(
     text='Chosen Score:'
 )
 
-# position the current value number in window
 current_value1_label.grid(
     row=4,
     columnspan=2,
@@ -88,7 +83,6 @@ value1_label.grid(
     sticky='n'
 )
 
-# add separator line after slider 1
 ttk.Label(root, text="_____________________________________________________________________________________________________________________________________________\n").grid(row=7,columnspan=2)
 
 #%% SLIDER 2 - Social
@@ -96,11 +90,14 @@ ttk.Label(root, text="__________________________________________________________
 # slider2 current value2
 current_value2 = tk.DoubleVar()
 
+
 def get_current_value2():
     return '{: .2f}'.format(current_value2.get())
 
+
 def slider2_changed(event):
     value2_label.configure(text=get_current_value2())
+
 
 # label for the slider2
 slider2_label = ttk.Label(
@@ -162,11 +159,14 @@ ttk.Label(root, text="__________________________________________________________
 # slider3 current value3
 current_value3 = tk.DoubleVar()
 
+
 def get_current_value3():
     return '{: .2f}'.format(current_value3.get())
 
+
 def slider3_changed(event):
     value3_label.configure(text=get_current_value3())
+
 
 # label for the slider3
 slider3_label = ttk.Label(
@@ -227,11 +227,14 @@ ttk.Label(root, text="__________________________________________________________
 #%% Risk Aversion
 current_value4 = tk.DoubleVar()
 
+
 def get_current_value4():
     return '{: .2f}'.format(current_value4.get())
 
+
 def slider4_changed(event):
     value4_label.configure(text=get_current_value4())
+
 
 # label for the slider4
 slider4_label = ttk.Label(
@@ -290,14 +293,12 @@ value4_label.grid(
 ttk.Label(root, text="_____________________________________________________________________________________________________________________________________________\n").grid(row=39,columnspan=2)
 
 #%% Stock Picking
-# Define Button command for retrieving value1
 e = tk.StringVar(root)
 def get_current_value5():
     global e
     value1 = e.get()
     return value1
 
-# Define button command for pressing "show sector names" button
 def call_sectors():
     window = tk.Tk()
     window.geometry('250x150')
@@ -305,28 +306,31 @@ def call_sectors():
     ttk.Label(window, text='   Communication Services \n   Consumer \n   Financials \n   Health Care \n   Information Technology \n   Utilities',
               ).grid(row=1, column=1)
     window.mainloop()
-
-# Create "show sector names" button including button action
+    
+    
 tk.Button(root, text="See sector names",command=call_sectors).grid(row=44,columnspan=2,ipadx=18, pady=4)
-ttk.Label(root,text="Type in any sector you'd like to neglect (Separate it by commas and exact name as shown):").grid(row=40, columnspan=2)
 
-# Create Entry box for getting user input
+
+ttk.Label(root,text="Type in any sector you'd like to neglect (Separate it by commas and exact name as shown):").grid(row=40, columnspan=2)
 e_entry = tk.Entry(root, width=50, textvariable = e).grid(row=41,columnspan=2, pady=2)
+
 
 e2 = tk.StringVar(root)
 
-# Create command for retrieving value 6 from GUI
 def get_current_value6():
     global e2
     value2 = e2.get()
     return value2
 
-# Create label and entry bocks for stocks that should be excluded
 ttk.Label(root, text="Stocks that should be excluded from the portfolio (Enter ticker and separate by comma, ex: TSLA, AAPL):").grid(row=45, columnspan=2)
 e2_entry = tk.Entry(root, width=50, textvariable = e2).grid(row=46, columnspan=2, pady=2)
 
+
+
+
+
 #%% Buttons
-# Create Button Command for "Confirm Values" Button
+
 def Confirm():
     
     #Globalize variables needed:
@@ -363,30 +367,30 @@ def Confirm():
     
     return esg_list, stock_list, sec_list
 
-#Create and position "Confirm Values" Button
+    
+
 Confirm = tk.Button(root, text="Confirm Values (1)", command= Confirm)
 Confirm.grid(
     row = 51, columnspan=2, sticky ="w", pady=4, ipadx=26, padx=127
 )
 
-# Create button to quit the app
 tk.Button(root, text="Quit", command=root.destroy, bg="#ed2f2f", fg="white").grid(row=53, column = 0, pady=4)
 
-# Create command for "Loading..." window to destroy when calculation is done
+#Create command for "Loading..." window before chart is shown:
 def shut_down():
     global window
     window = tk.Toplevel(root)
-    window.title("Loading... \nIt may take up to a minute")
-    Label1 = tk.Label(window, text="Calculating the portfolio may take up to a minute")
+    window.title("Creating Portfolio... \nIt may take up to a minute")
+    Label1 = tk.Label(window, text="Portfolio created successfully.")
     Label1.pack()
-    window.geometry("450x15")
+    window.geometry("450x60")
     window.grab_set()
     window.lift()
-        
 
-# Create button command for "create portfolio" button
+#Function that generates the chart of the investment portfolio:
 def get_portfolio():
     
+    #Globalize variables of the lists of inputs:
     global esg_list 
     global stock_list
     global sec_list
@@ -394,17 +398,17 @@ def get_portfolio():
     #Run loading window
     shut_down()
     
-    #### FAMA-FRENCH 3 Factor Model: Return Prediction ####
+    #Fama-French 3-Factor Model function used to predict stock returns:
     def getFamaFrench3_returns(stocks):
         
         '''
         stocks: DataFrame of stock/stocks price data.
-        returns: Series of Fama-French 3-Factor Model return predictions for each stock.
+        returns: Series of Fama-French 3-Factor Model yearly return predictions for each stock.
         '''
         #Package to perform least squares regression:
         import statsmodels.api as sm
         
-        #Read in fama-french data and select same time period as price data (2017-01-01 to 2022-04-28):
+        #Read in Fama-French data and select same time period as price data (2017-01-01 to 2022-04-28):
         ff_data = pd.read_csv('fama_french_data.csv', index_col='date', parse_dates=True)
         ff_data = ff_data.loc[ff_data.index > '2017']
         ff_data = ff_data.resample('M').last()
@@ -414,7 +418,7 @@ def get_portfolio():
         
         #Take excess returns of stocks (subtract risk-free rates):
         excess = stocks.pct_change()
-        excess.fillna(method='ffill', inplace=True)
+        excess.fillna(method='ffill', inplace=True)                  
         excess.fillna(0, inplace=True)
         excess = excess.subtract(ff_data.RF, axis=0)
         
@@ -422,24 +426,24 @@ def get_portfolio():
         factors = ff_data[['Mkt-RF', 'SMB', 'HML']]
         factors = sm.add_constant(factors)
         
-        #Perform regression to find fama-french 3-factor coefficients:
+        #Perform regression to find Fama-French 3-factor coefficients:
         ff_betas = sm.OLS(excess, factors).fit().params
         ff_betas.set_axis(excess.columns, axis=1, inplace=True)
         ff_betas = ff_betas.transpose()
         
-        #Set variables for fama-french model equation:
+        #Set variables for Fama-French model equation:
         r_f = ff_data.RF.mean()                         #Risk-free rate
         mkt_prem = ff_data['Mkt-RF'].mean()             #Market premium
         SMB = ff_data.SMB.mean()                        #Size premium
         HML = ff_data.HML.mean()                        #Value premium 
         ff_betas.set_axis(['const', 'b1', 'b2', 'b3'], axis=1, inplace=True)
         
-        #Estimate returns with model equation + annualize it:
+        #Estimate returns with model equation + annualize it (12 months in a year):
         e_r = (r_f + ff_betas.b1*mkt_prem + ff_betas.b2*SMB + ff_betas.b3*HML)*12
         
         return e_r
 
-    #### BLACK-LITTERMAN Model: Adjust Covariance + Returns to Predictions ####
+    # Black-Litterman Model: Adjust Covariance + Returns to Fama-French predictions:
     def BlackLit_opt(prices, risk_a):
         '''
         prices: DataFrame of stock price data.
@@ -455,7 +459,7 @@ def get_portfolio():
         Q = getFamaFrench3_returns(prices)
         Q = Q[Q>-1] 
         
-        prices = prices.loc[:, Q.index]
+        prices = prices.loc[:, Q.index]   #Filter price data to prediction data
         
         #Get market cap data for initial portfolio weights:
         mcap_data = pd.read_csv('mktcap.csv', index_col='ticker')
@@ -473,14 +477,14 @@ def get_portfolio():
         cov_shrunk = LedoitWolf().fit(cov)
         S = cov_shrunk.covariance_  
         
-        #Implied equilibrium excess returns vector (pi = 2A*S*w -> Meucci)
+        #Implied equilibrium excess returns vector (pi = 2A*S*w -> Meucci):
         pi = 2.0*A*(S@mcap_wgts)
         
         #Link matrix (P) with 1s showing the position of the stock for that view (return prediction):
         P = np.zeros((len(Q), len(Q)))   #Make a matrix with length of stocks and views
         np.fill_diagonal(P, 1)           #Fill matrix's diagonal with 1 for each stock
         
-        #Scalar (tau) and Uncertainty of views matrix (omega):
+        #Scalar (tau) and uncertainty of views matrix (omega):
             #tau 0 between 1 --> 1 / length of time series by Meucci
             #c default is 1 by Meucci -> constant rep overall confidence in the views return estimator
             #omega = 1/c * P * S * P^T -> Meucci
@@ -488,25 +492,23 @@ def get_portfolio():
         c = 1.0
         omega = np.dot(np.dot(P, S), P.T) / c
 
-        #BL Excess Return:
+        #BL Excess Return: (Meucci formula)
             # = pi + tau*S*P^T * (tau*P*S*P^T + omega)^-1 * (Q - P*pi)
         r2 = np.linalg.inv(tau*P@S@P.T + omega)
-        
         post_pi = pi + np.dot((tau*S@P.T) @ r2, (Q - P@pi))
         
-        #BL Covariance Matrix:
+        #BL Covariance Matrix: (Meucci formula)
             # = (1+tau)*S - tau^2*S*P.T * (tau*P*S*P.T + omega)^-1 * P*S
         c2 = np.linalg.inv(tau*P@S@P.T + omega) 
-
         post_S = (1.0+tau)*S - np.dot(np.dot(tau**2.0*np.dot(S, P.T), 
                  c2), np.dot(P, S))
         
         symS = (post_S + post_S.T) / 2  #Make it symmetric
-        semidefS = cov_nearest(symS)    #Ensure strict positive semi-definite
+        semidefS = cov_nearest(symS)    #Ensure strict positive semi-definite 
 
         return post_pi, semidefS, Q.index
 
-    #### MEAN-VARIANCE OPTIMIZATION: ESG Scores Integrated ####
+    #Mean-Variance Optimization integrating user preferences and Black-Lit. adjustments: 
     def allocate(E, S, G, r_a, no_sec=None, no_stock=None):
         '''
         E: Environmental score/care input (float).
@@ -516,11 +518,15 @@ def get_portfolio():
         r_a: Risk-aversion input (float).
         no_sec: list of unwanted sectors.
         no_stock: list of unwanted stocks.
-        Uses inputs of ESG and risk-aversion preferences to conduct mean-variance 
-                optimization for weights of allocation.
-        returns: DataFrame of allocation weights for each stock, list of portfolio metrics.
+        
+        Uses inputs of ESG and risk-aversion preferences along with return and
+                covariance adjustments of the Black-Litterman model to conduct 
+                mean-variance optimization for weights of allocation.
+                
+        returns: DataFrame of allocation weights and beta for each stock & 
+                list of portfolio metrics.
         '''
-        #Necessary packages:
+        #Necessary packages for optimization:
         import cvxpy as cp    
         from cvxpy.atoms.affine.wraps import psd_wrap
         
@@ -554,14 +560,14 @@ def get_portfolio():
         ret, cov, stocks = BlackLit_opt(prices, r_a)
         
         cov = psd_wrap(cov)     #Ensure positive semi-definite matrix 
-        esg = esg.loc[stocks]   #Filter for stocks used by Black-lit
+        esg = esg.loc[stocks]   #Filter for stocks used by Black-Lit.
         
         #Variables: weights, esg scores, volatility:
-        wgts = cp.Variable(len(ret))             #Variable to be optimized (weights of allocation)
-        E_scr = esg.E_score.values @ wgts        #Portfolio E score
-        S_scr = esg.S_score.values @ wgts        #Portfolio S score 
-        G_scr = esg.G_score.values @ wgts        #Portfolio G score
-        risk = cp.quad_form(wgts, cov)           #Portfolio Volatility
+        wgts = cp.Variable(len(ret))         #Variable to be optimized (weights of allocation)
+        E_scr = esg.E_score.values @ wgts    #Portfolio E score
+        S_scr = esg.S_score.values @ wgts    #Portfolio S score 
+        G_scr = esg.G_score.values @ wgts    #Portfolio G score
+        risk = cp.quad_form(wgts, cov)       #Portfolio Volatility
         
         A = r_a   #Risk-aversion parameter
         
@@ -578,16 +584,15 @@ def get_portfolio():
         wgts_df = pd.DataFrame(weights, columns=['Weight'], index=stocks)
         wgts_df['Return'] = ret
         
-        #Add ESG scores to list:
+        #Add ESG scores to a list:
         scores = [E_scr.value, S_scr.value, G_scr.value]
         
-        #Calculate betas:
-        #Get SPX Index (benchmark) price data:
+        #Get SPX Index (benchmark) price data for betas calculation:
         spx = pd.read_csv('daily_spx.csv', index_col=0, parse_dates=True)  #Benchmark prices
 
-        #Calculate Percetage returns of stocks and SPX:
-        ret_1Y = prices.iloc[-252:].pct_change()          #252 trading days in a year
-        ret_1Y['SPX'] = spx[-252:].pct_change()           #benchmark
+        #Calculate percentage returns of stocks and SPX:
+        ret_1Y = prices.iloc[-252:].pct_change()    #252 trading days in a year
+        ret_1Y['SPX'] = spx[-252:].pct_change()     #benchmark
         
         #Covariance of stocks and SPX:
         cov = ret_1Y.cov().iloc[:, -1]  
@@ -599,49 +604,54 @@ def get_portfolio():
         return wgts_df, scores
     
     #Get allocation weights and portfolio metrics:
-    port, s = allocate(float(esg_list[0]), float(esg_list[1]), float(esg_list[2]), float(esg_list[3]), sec_list, stock_list)
+    port, s = allocate(float(esg_list[0]),float(esg_list[1]),float(esg_list[2]), 
+                       float(esg_list[3]),sec_list,stock_list)
     
     #Construct Pie Chart of Portfolio:
     import seaborn as sea
     import matplotlib.pyplot as plt
    
-    #Portfolio Beta Calculation:
+    #Portfolio beta calculation:
     po = port.Weight
     po = po[po>0]
     p_b = port.Beta.loc[po.index]
-    beta = np.round(np.dot(po, p_b), 2)
+    beta = np.round(np.dot(po, p_b), 2)  #weighted average 
     
-    #Weights and return:
-    p = port.Weight*100
-    p.index = [stock.split()[0] for stock in p.index]
+    #Weights and return of portfolio (weighted average):
+    p = port.Weight*100                                       
+    p.index = [stock.split()[0] for stock in p.index]         
     r = np.round(np.dot(port.Return, port.Weight)*252*100, 2)
     
-    #Graph construction (Pie chart):
+    #Graph construction (pie chart):
     sea.set_theme()
     plt.figure(figsize=(10,8))
-    plt.pie(p[p>0], labels=p[p>0].index, autopct='%.1f%%', explode=np.full(len(p[p>0].index), 0.05))
+    plt.pie(p[p>0], labels=p[p>0].index, 
+            autopct='%.1f%%', explode=np.full(len(p[p>0].index), 0.05))
+    
+    #Making it a donut-type pie chart:
     center = plt.Circle((0,0), 0.45, fc='white')
     fig = plt.gcf()
     fig.gca().add_artist(center)
-    plt.title('Investment Portfolio:', bbox={'facecolor': 'none','edgecolor': 'black','boxstyle': 'round'}, 
+    
+    #Adding title and legend of stock names onto chart:
+    plt.title('Investment Portfolio:', 
+              bbox={'facecolor': 'none','edgecolor': 'black','boxstyle': 'round'}, 
               fontdict={'family':'serif','color':'black','weight': 'bold','size': 20})
     plt.legend(loc='upper left', title='Stocks:', bbox_to_anchor=(1.02, 1), borderaxespad=0)
     
-    esg_string = '''Annual Return: {}% \n1-Year Beta: {} \n\nESG Ratings: \nE: {} \nS: {} \nG: {} \nTotal: {}
-                 '''.format(r,beta,np.round(s[0],2),np.round(s[1],2),np.round(s[-1],2),np.round((s[0]+s[1]+s[-1])/3,2))
-                 
-    plt.annotate(esg_string, xy=(-1.2,0.85), xytext=(-2,0.51), bbox=dict(boxstyle="round", fc="0.8"),
-                 )
-    
-    plt.show()
-    
-    # Destroy loading window
-    window.destroy()
-    
+    #Making annotation string to exhibit portfolio metrics (Risk, Return, ESG):
+    esg_string = '''ESG Ratings: \n\nE:         {} \nS:         {} \nG:         {} \nTotal:   {}'''.format(np.round(s[0],1),np.round(s[1],1),np.round(s[-1],1),np.round((s[0]+s[1]+s[-1])/3,1))
+    risk_ret_string = 'Annual Return: {}% \n1-Year Beta:        {}'.format(r, beta)
 
-# Create and position "Create portfolio" button
-tk.Button(root, text="Create Portfolio (2)",command=get_portfolio,bg='#40e342', fg='black', font='bold').grid(row=52,columnspan=2, sticky ="w", pady=4, ipadx=7, padx=127)
+    #Annotating chart with strings made above:
+    plt.annotate(risk_ret_string, xy=(-1.2,0.85), xytext=(-2,0.85), fontsize=14, weight='bold',
+                 bbox=dict(boxstyle="round", facecolor='lightblue',edgecolor='steelblue', alpha=0.4))
+    plt.annotate(esg_string, xy=(-1.2,0.45), xytext=(-2,0.21), fontsize=14, weight='bold',
+                 bbox=dict(boxstyle="round", facecolor='lightblue',edgecolor='steelblue',alpha=0.3))
+    
+    plt.show()   #Exhibit chart
 
-# Run the application
+#Create button to generate the investment portfolio pie chart:
+tk.Button(root, text="Create Portfolio (2)", command=get_portfolio,bg='#40e342', fg='black', font='bold').grid(row=52,columnspan=2, sticky ="w", pady=4, ipadx=7, padx=127)
+
 root.mainloop()
-
