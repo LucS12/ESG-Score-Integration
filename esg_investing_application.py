@@ -383,6 +383,7 @@ def shut_down():
     window.title("Creating Portfolio... \nIt may take up to a minute")
     Label1 = tk.Label(window, text="Portfolio created successfully.")
     Label1.pack()
+    tk.Button(window, text="OK",command=window.destroy).pack()
     window.geometry("450x60")
     window.grab_set()
     window.lift()
