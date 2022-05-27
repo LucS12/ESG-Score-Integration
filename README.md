@@ -15,7 +15,7 @@ Project integrating ethically responsible criteria in investment portfolios thro
 
 
 ## Files & Data Folders:
-- **esg_investing_application.py:** Python code used to build the GUI application and the asset allocation algorithm/methodology.
+- **esg_investing_application.py:** Python code used to build the GUI application and the asset allocation algorithm/methodology. Necessary data input:
   - *daily_prices.csv:* CSV file containing daily price data of stocks used.
   - *daily_spx.csv:*  CSV file containing daily price data of SPX Index for beta calculations.
   - *env.csv:* CSV file containing sector/grouping information for each stock.
